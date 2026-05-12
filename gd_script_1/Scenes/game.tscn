@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://du47nqxmd7gb1"]
+
+[node name="Game" type="Node2D" unique_id=2008482081]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=868259294]
