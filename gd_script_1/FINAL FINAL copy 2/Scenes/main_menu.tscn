@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://cfpwv3ai25c5"]
+
+[ext_resource type="Texture2D" uid="uid://cw10ksuspjbom" path="res://MainMenu/UI/BPlay.png" id="1_n45e2"]
+[ext_resource type="Texture2D" uid="uid://dd4qt5wi118uj" path="res://MainMenu/UI/BHelp.png" id="2_opfnp"]
+[ext_resource type="Texture2D" uid="uid://cp7yevcof7c1b" path="res://MainMenu/UI/BOptions.png" id="3_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://p6vyuhjug3y8" path="res://MainMenu/UI/BQuit.png" id="4_yhxw7"]
+[ext_resource type="Texture2D" uid="uid://bhv7nre1mx6mt" path="res://MainMenu/UI/SPOT.png" id="5_trj04"]
+[ext_resource type="AudioStream" uid="uid://cckxld4lfab5v" path="res://audio/maintheme.wav" id="6_opfnp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nlkkf"]
+load_path = "res://.godot/imported/1.png-65160d6cb6775eeb84177a329c65d2fd.ctex"
+
+[sub_resource type="GDScript" id="GDScript_glbon"]
+resource_name = "PlayInteractive"
+script/source = "extends TextureButton
+
+var hover_scale = Vector2(1.1, 1.1)
+var normal_scale = Vector2(1.0, 1.0)
+var tween_speed = 0.15
+
+func _ready():
+	mouse_entered.connect(_on_hover)
+	mouse_exited.connect(_on_unhover)
+	pivot_offset = size / 2
+
+func _on_hover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", hover_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.3, 1.3, 1.3), tween_speed)
+
+func _on_unhover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", normal_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.0, 1.0, 1.0), tween_speed)
+
+func _on_play_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/game.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_nlkkf"]
+resource_name = "HelpInteractive"
+script/source = "extends TextureButton
+
+var hover_scale = Vector2(1.1, 1.1)
+var normal_scale = Vector2(1.0, 1.0)
+var tween_speed = 0.15
+
+func _ready():
+	mouse_entered.connect(_on_hover)
+	mouse_exited.connect(_on_unhover)
+	pivot_offset = size / 2
+
+func _on_hover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", hover_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.3, 1.3, 1.3), tween_speed)
+
+func _on_unhover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", normal_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.0, 1.0, 1.0), tween_speed)
+
+func _on_help_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/help.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_qe12f"]
+resource_name = "OptionInteractive"
+script/source = "extends TextureButton
+
+var hover_scale = Vector2(1.1, 1.1)
+var normal_scale = Vector2(1.0, 1.0)
+var tween_speed = 0.15
+
+func _ready():
+	mouse_entered.connect(_on_hover)
+	mouse_exited.connect(_on_unhover)
+	pivot_offset = size / 2
+
+func _on_hover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", hover_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.3, 1.3, 1.3), tween_speed)
+
+func _on_unhover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", normal_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.0, 1.0, 1.0), tween_speed)
+
+func _on_options_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/options.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_8qtwp"]
+resource_name = "QuitInteractive"
+script/source = "extends TextureButton
+
+var hover_scale = Vector2(1.1, 1.1)
+var normal_scale = Vector2(1.0, 1.0)
+var tween_speed = 0.15
+
+func _ready():
+	mouse_entered.connect(_on_hover)
+	mouse_exited.connect(_on_unhover)
+	pivot_offset = size / 2
+
+func _on_hover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", hover_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.3, 1.3, 1.3), tween_speed)
+
+func _on_unhover():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", normal_scale, tween_speed)
+	tween.parallel().tween_property(self, \"modulate\", Color(1.0, 1.0, 1.0), tween_speed)
+
+# ADD THIS AT THE BOTTOM 👇
+func _on_quit_pressed():
+	get_tree().quit()
+
+
+func _on_pressed() -> void:
+	pass # Replace with function body.
+"
+
+[node name="Main Menu" type="Node2D" unique_id=1193238337]
+
+[node name="ButtonHub" type="Control" parent="." unique_id=1869882474]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="ButtonHub" unique_id=1516805606]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("CompressedTexture2D_nlkkf")
+flip_h = true
+
+[node name="Play" type="TextureButton" parent="ButtonHub" unique_id=1032183348]
+texture_filter = 1
+layout_mode = 0
+offset_left = 735.0
+offset_top = 541.0
+offset_right = 1269.0
+offset_bottom = 745.0
+texture_normal = ExtResource("1_n45e2")
+stretch_mode = 5
+script = SubResource("GDScript_glbon")
+
+[node name="Help" type="TextureButton" parent="ButtonHub" unique_id=1303355393]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1509.0
+offset_top = 678.0
+offset_right = 1947.0
+offset_bottom = 872.0
+texture_normal = ExtResource("2_opfnp")
+stretch_mode = 5
+script = SubResource("GDScript_nlkkf")
+
+[node name="Options" type="TextureButton" parent="ButtonHub" unique_id=1433158873]
+texture_filter = 1
+layout_mode = 0
+offset_left = 665.0
+offset_top = 762.0
+offset_right = 1347.0
+offset_bottom = 988.0
+texture_normal = ExtResource("3_cp0ys")
+stretch_mode = 5
+script = SubResource("GDScript_qe12f")
+
+[node name="Quit" type="TextureButton" parent="ButtonHub" unique_id=166451417]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1528.0
+offset_top = 871.0
+offset_right = 1940.0
+offset_bottom = 1046.0
+texture_normal = ExtResource("4_yhxw7")
+stretch_mode = 5
+script = SubResource("GDScript_8qtwp")
+
+[node name="Title" type="TextureRect" parent="ButtonHub" unique_id=55265899]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 20.0
+offset_right = 1405.0
+offset_bottom = 541.0
+texture = ExtResource("5_trj04")
+expand_mode = 1
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=700900920]
+stream = ExtResource("6_opfnp")
+autoplay = true
+
+[connection signal="pressed" from="ButtonHub/Play" to="ButtonHub/Play" method="_on_play_pressed"]
+[connection signal="pressed" from="ButtonHub/Help" to="ButtonHub/Help" method="_on_help_pressed"]
+[connection signal="pressed" from="ButtonHub/Options" to="ButtonHub/Options" method="_on_options_pressed"]
+[connection signal="pressed" from="ButtonHub/Quit" to="ButtonHub/Quit" method="_on_quit_pressed"]

@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bu83hgex0p1br"]
+
+[ext_resource type="Texture2D" uid="uid://djp6ytyuk5snd" path="res://Sprites/Characters/droplet.png" id="1_ld1sl"]
+
+[sub_resource type="GDScript" id="GDScript_4mtx4"]
+resource_name = "raindrop.gd"
+script/source = "extends Area2D
+
+var speed = 0.0
+var hit = false
+
+func setup():
+	var size_scale = randf_range(0.5, 2.0)
+	scale = Vector2(size_scale, size_scale)
+	speed = remap(size_scale, 0.5, 2.0, 600, 200)
+	monitoring = true
+	monitorable = true
+
+func _physics_process(_delta):
+	position.y += speed * _delta
+	if position.y > 1200:
+		queue_free()
+	
+	if hit:
+		return
+		
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group(\"player\"):
+			hit = true
+			get_tree().get_root().get_node(\"Game\").take_damage()
+			queue_free()
+			return
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcmae"]
+radius = 22.022715
+
+[node name="raindrop" type="Area2D" unique_id=383590135]
+script = SubResource("GDScript_4mtx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1202228803]
+texture_filter = 1
+texture = ExtResource("1_ld1sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1948033686]
+position = Vector2(2, 13)
+shape = SubResource("CircleShape2D_lcmae")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
